@@ -1,0 +1,36 @@
+{
+  "name": "mikro-orm-koa-ts-example",
+  "version": "0.0.1",
+  "description": "Example integration of MikroORM into Koa (in typescript)",
+  "author": "Martin Adamek",
+  "license": "MIT",
+  "scripts": {
+    "start": "tsc && node dist/server",
+    "start:dev": "nodemon --watch 'app/**/*.ts' --exec 'ts-node' --transpile-only app/server.ts",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@mikro-orm/core": "^4.0.0-rc.0",
+    "@mikro-orm/sql-highlighter": "^1.0.1",
+    "@mikro-orm/sqlite": "^4.0.0-rc.0",
+    "koa": "^2.13.0",
+    "koa-body": "^4.2.0",
+    "koa-router": "^9.1.0",
+    "reflect-metadata": "^0.1.13",
+    "typescript": "3.9.7"
+  },
+  "devDependencies": {
+    "@mikro-orm/cli": "^4.0.0-rc.0",
+    "@types/koa": "^2.11.3",
+    "@types/koa-router": "^7.4.1",
+    "nodemon": "^2.0.4",
+    "ts-node": "^8.10.2"
+  },
+  "mikro-orm": {
+    "useTsNode": true,
+    "configPaths": [
+      "./app/mikro-orm.config.ts",
+      "./dist/mikro-orm.config.js"
+    ]
+  }
+}

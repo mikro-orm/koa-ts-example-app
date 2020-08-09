@@ -1,0 +1,6 @@
+dist
+temp
+node_modules
+.idea
+test.db
+yarn-error.log
