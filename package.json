@@ -42,7 +42,7 @@
     "koa-body": "^4.2.0",
     "koa-router": "^9.1.0",
     "reflect-metadata": "^0.1.13",
-    "typescript": "3.9.7"
+    "typescript": "4.5.5"
   },
   "devDependencies": {
     "@mikro-orm/cli": "^4.0.0-rc.6",
