@@ -12,7 +12,7 @@ router.get('/', async (ctx: Context) => {
 
 router.get('/:id', async (ctx: Context) => {
   try {
-    const book = await DI.bookRepository.findOne(ctx.query.id, ['author']);
+    const book = await DI.bookRepository.findOne(ctx.path.id, ['author']);
 
     if (!book) {
       return ctx.throw(404, { message: 'Book not found' });
@@ -43,7 +43,7 @@ router.post('/', async (ctx: Context) => {
 
 router.put('/:id', async (ctx: Context) => {
   try {
-    const book = await DI.bookRepository.findOne(ctx.query.id);
+    const book = await DI.bookRepository.findOne(ctx.path.id);
 
     if (!book) {
       return ctx.throw(404, { message: 'Book not found' });
