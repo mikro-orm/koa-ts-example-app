@@ -13,7 +13,7 @@ router.get('/', async (ctx: Context) => {
 
 router.get('/:id', async (ctx: Context) => {
   try {
-    const author = await DI.authorRepository.findOne(ctx.query.id, ['books']);
+    const author = await DI.authorRepository.findOne(ctx.params.id, ['books']);
 
     if (!author) {
       return ctx.throw(404, { message: 'Author not found' });
