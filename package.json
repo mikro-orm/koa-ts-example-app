@@ -35,9 +35,9 @@
     ]
   },
   "dependencies": {
-    "@mikro-orm/core": "^5.0.0",
+    "@mikro-orm/core": "^6.0.0",
     "@mikro-orm/sql-highlighter": "^1.0.1",
-    "@mikro-orm/sqlite": "^5.0.0",
+    "@mikro-orm/sqlite": "^6.0.0",
     "koa": "^2.13.0",
     "koa-body": "^4.2.0",
     "koa-router": "^10.0.0",
@@ -45,7 +45,7 @@
     "typescript": "4.6.3"
   },
   "devDependencies": {
-    "@mikro-orm/cli": "^5.0.0",
+    "@mikro-orm/cli": "^6.0.0",
     "@types/koa": "^2.11.3",
     "@types/koa-router": "^7.4.1",
     "nodemon": "^2.0.4",
