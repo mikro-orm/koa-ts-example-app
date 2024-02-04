@@ -1,25 +1,31 @@
-import { QueryOrder, wrap } from '@mikro-orm/core';
+import { QueryOrder, wrap } from '@mikro-orm/better-sqlite';
 import { Context } from 'koa';
 import Router from 'koa-router';
 
 import { DI } from '../server';
+import { z } from 'zod';
 
 const router = new Router();
 
 router.get('/', async (ctx: Context) => {
-  ctx.body = await DI.bookRepository.findAll(['author'], { title: QueryOrder.DESC }, 20);
+  ctx.body = await DI.books.findAll({
+    populate: ['author'],
+    orderBy: { title: QueryOrder.DESC },
+    limit: 20,
+  });
 });
 
 router.get('/:id', async (ctx: Context) => {
   try {
-    const book = await DI.bookRepository.findOne(ctx.query.id, ['author']);
+    const query = z.object({ id: z.number() }).parse(ctx.query);
+    const book = await DI.books.findOne(query.id, { populate: ['author'] });
 
     if (!book) {
       return ctx.throw(404, { message: 'Book not found' });
     }
 
     ctx.body = book;
-  } catch (e) {
+  } catch (e: any) {
     console.error(e);
     return ctx.throw(400, { message: e.message });
   }
@@ -31,11 +37,11 @@ router.post('/', async (ctx: Context) => {
   }
 
   try {
-    const book = DI.bookRepository.create(ctx.request.body);
-    await DI.bookRepository.persist(book).flush();
+    const book = DI.books.create(ctx.request.body);
+    await DI.em.flush();
 
     ctx.body = book;
-  } catch (e) {
+  } catch (e: any) {
     console.error(e);
     return ctx.throw(400, { message: e.message });
   }
@@ -43,17 +49,18 @@ router.post('/', async (ctx: Context) => {
 
 router.put('/:id', async (ctx: Context) => {
   try {
-    const book = await DI.bookRepository.findOne(ctx.query.id);
+    const query = z.object({ id: z.number() }).parse(ctx.query);
+    const book = await DI.books.findOne(query.id);
 
     if (!book) {
       return ctx.throw(404, { message: 'Book not found' });
     }
 
     wrap(book).assign(ctx.request.body);
-    await DI.bookRepository.persist(book).flush();
+    await DI.em.flush();
 
     ctx.body = book;
-  } catch (e) {
+  } catch (e: any) {
     console.error(e);
     return ctx.throw(400, { message: e.message });
   }

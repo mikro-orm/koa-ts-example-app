@@ -2,8 +2,8 @@ import 'reflect-metadata';
 
 import Koa, { Context } from 'koa';
 import Router from 'koa-router';
-import bodyParser from 'koa-body';
-import { EntityManager, EntityRepository, MikroORM, RequestContext } from '@mikro-orm/core';
+import { koaBody } from 'koa-body';
+import { EntityManager, EntityRepository, MikroORM, RequestContext } from '@mikro-orm/better-sqlite';
 
 import { AuthorController, BookController } from './controllers';
 import { Author, Book } from './entities';
@@ -11,8 +11,8 @@ import { Author, Book } from './entities';
 export const DI = {} as {
   orm: MikroORM,
   em: EntityManager,
-  authorRepository: EntityRepository<Author>,
-  bookRepository: EntityRepository<Book>,
+  authors: EntityRepository<Author>,
+  books: EntityRepository<Book>,
 };
 
 export const app = new Koa();
@@ -28,11 +28,13 @@ const port = process.env.PORT || 3000;
 (async () => {
   DI.orm = await MikroORM.init(); // CLI config will be used automatically
   DI.em = DI.orm.em;
-  DI.authorRepository = DI.orm.em.getRepository(Author);
-  DI.bookRepository = DI.orm.em.getRepository(Book);
+  DI.authors = DI.orm.em.getRepository(Author);
+  DI.books = DI.orm.em.getRepository(Book);
 
-  app.use(bodyParser());
-  app.use((ctx, next) => RequestContext.createAsync(DI.orm.em, next));
+  await DI.orm.schema.updateSchema();
+
+  app.use(koaBody());
+  app.use((ctx, next) => RequestContext.create(DI.orm.em, next));
   app.use(api.routes());
   app.use(api.allowedMethods());
   app.use((ctx, next) => {

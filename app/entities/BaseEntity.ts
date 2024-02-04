@@ -1,4 +1,4 @@
-import { PrimaryKey, Property } from '@mikro-orm/core';
+import { PrimaryKey, Property } from '@mikro-orm/better-sqlite';
 
 export abstract class BaseEntity {
 
@@ -6,9 +6,9 @@ export abstract class BaseEntity {
   id!: number;
 
   @Property()
-  createdAt: Date = new Date();
+  createdAt = new Date();
 
   @Property({ onUpdate: () => new Date() })
-  updatedAt: Date = new Date();
+  updatedAt = new Date();
 
 }

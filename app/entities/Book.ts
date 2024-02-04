@@ -1,4 +1,4 @@
-import { Cascade, Collection, Entity, ManyToMany, ManyToOne, Property } from '@mikro-orm/core';
+import { Cascade, Collection, Entity, ManyToMany, ManyToOne, Property } from '@mikro-orm/better-sqlite';
 import { Author, BookTag, Publisher } from './index';
 import { BaseEntity } from './BaseEntity';
 

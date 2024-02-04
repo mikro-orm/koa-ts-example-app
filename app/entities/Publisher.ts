@@ -1,4 +1,4 @@
-import { Collection, Entity, Enum, OneToMany, PrimaryKey, Property } from '@mikro-orm/core';
+import { Collection, Entity, Enum, OneToMany, PrimaryKey, Property } from '@mikro-orm/better-sqlite';
 import { Book } from '.';
 
 @Entity()
