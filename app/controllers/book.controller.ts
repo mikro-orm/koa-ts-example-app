@@ -17,8 +17,8 @@ router.get('/', async (ctx: Context) => {
 
 router.get('/:id', async (ctx: Context) => {
   try {
-    const query = z.object({ id: z.number() }).parse(ctx.query);
-    const book = await DI.books.findOne(query.id, { populate: ['author'] });
+    const params = z.object({ id: z.number() }).parse(ctx.params);
+    const book = await DI.books.findOne(params.id, { populate: ['author'] });
 
     if (!book) {
       return ctx.throw(404, { message: 'Book not found' });
@@ -49,8 +49,8 @@ router.post('/', async (ctx: Context) => {
 
 router.put('/:id', async (ctx: Context) => {
   try {
-    const query = z.object({ id: z.number() }).parse(ctx.query);
-    const book = await DI.books.findOne(query.id);
+    const params = z.object({ id: z.number() }).parse(ctx.params);
+    const book = await DI.books.findOne(params.id);
 
     if (!book) {
       return ctx.throw(404, { message: 'Book not found' });
