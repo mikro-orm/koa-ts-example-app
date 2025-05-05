@@ -38,7 +38,7 @@
     "@mikro-orm/better-sqlite": "^6.0.0",
     "@mikro-orm/core": "^6.0.0",
     "@mikro-orm/sql-highlighter": "^1.0.1",
-    "koa": "^2.15.0",
+    "koa": "^3.0.0",
     "koa-body": "^6.0.1",
     "koa-router": "^12.0.1",
     "reflect-metadata": "^0.2.1",
