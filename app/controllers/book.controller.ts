@@ -1,4 +1,4 @@
-import { QueryOrder, wrap } from '@mikro-orm/better-sqlite';
+import { QueryOrder, wrap } from '@mikro-orm/sqlite';
 import { Context } from 'koa';
 import Router from 'koa-router';
 

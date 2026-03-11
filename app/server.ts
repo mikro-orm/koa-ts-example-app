@@ -1,12 +1,11 @@
-import 'reflect-metadata';
-
 import Koa, { Context } from 'koa';
 import Router from 'koa-router';
 import { koaBody } from 'koa-body';
-import { EntityManager, EntityRepository, MikroORM, RequestContext } from '@mikro-orm/better-sqlite';
+import { EntityManager, EntityRepository, MikroORM, RequestContext } from '@mikro-orm/sqlite';
 
 import { AuthorController, BookController } from './controllers';
 import { Author, Book } from './entities';
+import config from './mikro-orm.config';
 
 export const DI = {} as {
   orm: MikroORM,
@@ -26,12 +25,12 @@ api.use('/book', BookController.routes());
 const port = process.env.PORT || 3000;
 
 (async () => {
-  DI.orm = await MikroORM.init(); // CLI config will be used automatically
+  DI.orm = await MikroORM.init(config);
   DI.em = DI.orm.em;
   DI.authors = DI.orm.em.getRepository(Author);
   DI.books = DI.orm.em.getRepository(Book);
 
-  await DI.orm.schema.updateSchema();
+  await DI.orm.schema.update();
 
   app.use(koaBody());
   app.use((ctx, next) => RequestContext.create(DI.orm.em, next));

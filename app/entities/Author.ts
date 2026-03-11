@@ -1,4 +1,5 @@
-import { Cascade, Collection, Entity, OneToMany, Property, ManyToOne, Unique } from '@mikro-orm/better-sqlite';
+import { Entity, OneToMany, Property, ManyToOne, Unique } from '@mikro-orm/decorators/legacy';
+import { Cascade, Collection } from '@mikro-orm/sqlite';
 
 import { Book } from '.';
 import { BaseEntity } from './BaseEntity';

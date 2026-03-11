@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "start": "tsc && node dist/server",
-    "start:dev": "nodemon --watch 'app/**/*.ts' --exec 'ts-node' --transpile-only app/server.ts",
+    "start:dev": "nodemon --watch 'app/**/*.ts' --exec 'tsx' app/server.ts",
     "build": "tsc"
   },
   "renovate": {
@@ -34,27 +34,29 @@
       "every weekday"
     ]
   },
+  "engines": {
+    "node": ">= 22.17.0"
+  },
   "dependencies": {
-    "@mikro-orm/better-sqlite": "^6.0.0",
-    "@mikro-orm/core": "^6.0.0",
+    "@mikro-orm/core": "^7.0.1",
+    "@mikro-orm/decorators": "^7.0.1",
+    "@mikro-orm/sqlite": "^7.0.1",
     "@mikro-orm/sql-highlighter": "^1.0.1",
     "koa": "^3.0.0",
     "koa-body": "^7.0.0",
     "koa-router": "^14.0.0",
-    "reflect-metadata": "^0.2.1",
     "typescript": "5.9.3",
     "zod": "^4.0.0"
   },
   "devDependencies": {
-    "@mikro-orm/cli": "^6.0.0",
+    "@mikro-orm/cli": "^7.0.1",
     "@types/koa": "^3.0.0",
     "@types/koa-router": "^7.4.8",
     "@types/node": "^24.0.0",
     "nodemon": "^3.0.3",
-    "ts-node": "^10.9.2"
+    "tsx": "^4.0.0"
   },
   "mikro-orm": {
-    "useTsNode": true,
     "configPaths": [
       "./app/mikro-orm.config.ts",
       "./dist/mikro-orm.config.js"

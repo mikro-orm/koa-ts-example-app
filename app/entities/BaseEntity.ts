@@ -1,4 +1,4 @@
-import { PrimaryKey, Property } from '@mikro-orm/better-sqlite';
+import { PrimaryKey, Property } from '@mikro-orm/decorators/legacy';
 
 export abstract class BaseEntity {
 
