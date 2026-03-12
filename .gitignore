@@ -2,5 +2,7 @@ dist
 temp
 node_modules
 .idea
+.yarn
 test.db
+koa-test-db
 yarn-error.log
