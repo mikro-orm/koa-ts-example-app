@@ -1,4 +1,5 @@
-import Koa, { Context } from 'koa';
+import http from 'http';
+import Koa from 'koa';
 import Router from 'koa-router';
 import { koaBody } from 'koa-body';
 import { EntityManager, EntityRepository, MikroORM, RequestContext } from '@mikro-orm/sqlite';
@@ -8,6 +9,7 @@ import { Author, Book } from './entities';
 import config from './mikro-orm.config';
 
 export const DI = {} as {
+  server: http.Server;
   orm: MikroORM,
   em: EntityManager,
   authors: EntityRepository<Author>,
@@ -18,13 +20,13 @@ export const app = new Koa();
 
 // Entry point for all modules.
 const api = new Router();
-api.get('/', (ctx: Context) => ctx.body = { message: 'Welcome to MikroORM Koa TS example, try CRUD on /author and /book endpoints!' });
+api.get('/', ctx => ctx.body = { message: 'Welcome to MikroORM Koa TS example, try CRUD on /author and /book endpoints!' });
 api.use('/author', AuthorController.routes());
 api.use('/book', BookController.routes());
 
 const port = process.env.PORT || 3000;
 
-(async () => {
+export const init = (async () => {
   DI.orm = await MikroORM.init(config);
   DI.em = DI.orm.em;
   DI.authors = DI.orm.em.getRepository(Author);
@@ -41,7 +43,7 @@ const port = process.env.PORT || 3000;
     ctx.body = { message: 'No route found' };
   });
 
-  app.listen(port, () => {
+  DI.server = app.listen(port, () => {
     console.log(`MikroORM Koa TS example started at http://localhost:${port}`);
   });
 })();

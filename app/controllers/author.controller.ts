@@ -1,5 +1,4 @@
 import { QueryOrder } from '@mikro-orm/sqlite';
-import { Context } from 'koa';
 import Router from 'koa-router';
 
 import { DI } from '../server';
@@ -8,7 +7,7 @@ import { z } from 'zod';
 
 const router = new Router();
 
-router.get('/', async (ctx: Context) => {
+router.get('/', async ctx => {
   ctx.body = await DI.authors.findAll({
     populate: ['books'],
     orderBy: { name: QueryOrder.DESC },
@@ -16,9 +15,9 @@ router.get('/', async (ctx: Context) => {
   });
 });
 
-router.get('/:id', async (ctx: Context) => {
+router.get('/:id', async ctx => {
   try {
-    const params = z.object({ id: z.number() }).parse(ctx.params);
+    const params = z.object({ id: z.coerce.number() }).parse(ctx.params);
     const author = await DI.authors.findOne(params.id, { populate: ['books'] });
 
     if (!author) {
@@ -32,13 +31,15 @@ router.get('/:id', async (ctx: Context) => {
   }
 });
 
-router.post('/', async (ctx: Context) => {
-  if (!ctx.request.body.name || !ctx.request.body.email) {
+router.post('/', async ctx => {
+  const body = (ctx.request as any).body;
+
+  if (!body.name || !body.email) {
     return ctx.throw(400, { message: 'One of `name, email` is missing' });
   }
 
   try {
-    const author = DI.em.create(Author, ctx.request.body);
+    const author = DI.em.create(Author, body);
     await DI.em.flush();
 
     ctx.body = author;
@@ -48,16 +49,16 @@ router.post('/', async (ctx: Context) => {
   }
 });
 
-router.put('/:id', async (ctx: Context) => {
+router.put('/:id', async ctx => {
   try {
-    const params = z.object({ id: z.number() }).parse(ctx.params);
+    const params = z.object({ id: z.coerce.number() }).parse(ctx.params);
     const author = await DI.authors.findOne(params.id);
 
     if (!author) {
       return ctx.throw(404, { message: 'Author not found' });
     }
 
-    DI.em.assign(author, ctx.request.body);
+    DI.em.assign(author, (ctx.request as any).body);
     await DI.em.flush();
 
     ctx.body = author;

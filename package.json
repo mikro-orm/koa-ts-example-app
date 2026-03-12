@@ -7,7 +7,9 @@
   "scripts": {
     "start": "tsc && node dist/server",
     "start:dev": "nodemon --watch 'app/**/*.ts' --exec 'tsx' app/server.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "renovate": {
     "extends": [
@@ -40,21 +42,29 @@
   "dependencies": {
     "@mikro-orm/core": "^7.0.1",
     "@mikro-orm/decorators": "^7.0.1",
-    "@mikro-orm/sqlite": "^7.0.1",
     "@mikro-orm/sql-highlighter": "^1.0.1",
+    "@mikro-orm/sqlite": "^7.0.1",
     "koa": "^3.0.0",
     "koa-body": "^7.0.0",
     "koa-router": "^14.0.0",
     "typescript": "5.9.3",
     "zod": "^4.0.0"
   },
+  "packageManager": "yarn@4.13.0",
   "devDependencies": {
     "@mikro-orm/cli": "^7.0.1",
+    "@swc-node/register": "^1.11.1",
+    "@swc/core": "^1.15.3",
     "@types/koa": "^3.0.0",
     "@types/koa-router": "^7.4.8",
     "@types/node": "^24.0.0",
+    "@types/supertest": "^7.0.0",
     "nodemon": "^3.0.3",
-    "tsx": "^4.0.0"
+    "reflect-metadata": "^0.2.2",
+    "supertest": "^7.0.0",
+    "tsx": "^4.0.0",
+    "unplugin-swc": "^1.5.9",
+    "vitest": "^4.1.0"
   },
   "mikro-orm": {
     "configPaths": [
