@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "start": "tsc && node dist/server",
-    "start:dev": "nodemon --watch 'app/**/*.ts' --exec 'tsx' app/server.ts",
+    "start:dev": "tsx watch app/server.ts",
     "build": "tsc",
     "test": "vitest run",
     "test:watch": "vitest"
@@ -59,7 +59,6 @@
     "@types/koa-router": "^7.4.8",
     "@types/node": "^24.0.0",
     "@types/supertest": "^7.0.0",
-    "nodemon": "^3.0.3",
     "reflect-metadata": "^0.2.2",
     "supertest": "^7.0.0",
     "tsx": "^4.0.0",
