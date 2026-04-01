@@ -4,6 +4,7 @@
     "target": "ESNext",
     "moduleResolution": "NodeNext",
     "declaration": true,
+    "rootDir": "./app",
     "outDir": "./dist",
     "esModuleInterop": true,
     "emitDecoratorMetadata": true,
