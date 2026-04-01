@@ -1,5 +1,6 @@
 dist
 temp
+tsconfig.tsbuildinfo
 node_modules
 .idea
 .yarn
