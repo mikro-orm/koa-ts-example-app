@@ -47,7 +47,7 @@
     "koa": "^3.0.0",
     "koa-body": "^7.0.0",
     "koa-router": "^14.0.0",
-    "typescript": "5.9.3",
+    "typescript": "6.0.2",
     "zod": "^4.0.0"
   },
   "packageManager": "yarn@4.13.0",
