@@ -47,10 +47,10 @@
     "koa": "^3.0.0",
     "koa-body": "^7.0.0",
     "koa-router": "^14.0.0",
-    "typescript": "6.0.2",
+    "typescript": "6.0.3",
     "zod": "^4.0.0"
   },
-  "packageManager": "yarn@4.13.0",
+  "packageManager": "yarn@4.14.1",
   "devDependencies": {
     "@mikro-orm/cli": "^7.0.6",
     "@swc-node/register": "^1.11.1",
