@@ -2,7 +2,7 @@
 # Manual changes might be lost - proceed with caution!
 
 __metadata:
-  version: 8
+  version: 10
   cacheKey: 10c0
 
 "@emnapi/core@npm:^1.7.1":
@@ -2484,6 +2484,11 @@ __metadata:
     vite: "npm:^8.2.2"
     vitest: "npm:^5.0.0"
     zod: "npm:^4.0.0"
+  dependenciesMeta:
+    "@swc/core":
+      built: true
+    better-sqlite3:
+      built: true
   languageName: unknown
   linkType: soft
 
