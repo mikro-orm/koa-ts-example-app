@@ -67,6 +67,14 @@
     "vite": "^8.2.2",
     "vitest": "^5.0.0"
   },
+  "dependenciesMeta": {
+    "@swc/core": {
+      "built": true
+    },
+    "better-sqlite3": {
+      "built": true
+    }
+  },
   "mikro-orm": {
     "configPaths": [
       "./app/mikro-orm.config.ts",
